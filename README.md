@@ -16,10 +16,11 @@
 ## 🖼️ Demo
 
 <p align="center">
-  <img src="./demo.gif" width="700" alt="Fireworks Demo">
+  <img src="https://raw.githubusercontent.com/tunacosgun/Fireworks-Launcher/main/demo.gif" width="700" alt="Fireworks Demo">
 </p>
 
-> **Not:** `demo.gif` dosyasını bu README ile **aynı klasöre** koy. Dosya adında büyük/küçük harfe dikkat et (ör. `Demo.gif` ≠ `demo.gif`).
+> Not: Eğer repo adı/branch farklıysa yukarıdaki URL’de `tunacosgun/Fireworks-Launcher/main` kısmını kendine göre değiştir.  
+> Alternatif: `![Fireworks Demo](./demo.gif?raw=1)` de kullanılabilir.
 
 ---
 
@@ -37,8 +38,8 @@
 
 ```bash
 # (Opsiyonel) Repo olarak klonla
-git clone https://github.com/tunacosgun/fireworks-launcher.git
-cd fireworks-launcher
+git clone https://github.com/tunacosgun/Fireworks-Launcher.git
+cd Fireworks-Launcher
 
 # Çalıştır
 # Sadece index.html dosyasını tarayıcıda açman yeterli
