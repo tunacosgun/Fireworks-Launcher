@@ -68,9 +68,9 @@ fireworks-launcher/
 
 Ekran kaydı alıp GIF’e çevirerek projeye ekleyebilirsin:
 
-markdown
-![Fireworks Demo](demo.gif)
-```
+## 🖼️ Demo
+
+![Fireworks Demo](./demo.gif)
 
 ---
 
