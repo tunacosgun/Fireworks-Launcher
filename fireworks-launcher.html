@@ -1,0 +1,386 @@
+<!DOCTYPE html> <!-- Tunahan Coşgun, github.com/tunacosgun -->
+<html lang="en"> <!-- Tunahan Coşgun, github.com/tunacosgun -->
+  <head> <!-- Tunahan Coşgun, github.com/tunacosgun -->
+    <meta charset="UTF-8"> <!-- Tunahan Coşgun, github.com/tunacosgun -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Tunahan Coşgun, github.com/tunacosgun -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet"> <!-- Tunahan Coşgun, github.com/tunacosgun -->
+    <title>Fireworks Launcher</title> <!-- Tunahan Coşgun, github.com/tunacosgun -->
+    <style> /* Tunahan Coşgun, github.com/tunacosgun */
+      body { /* Tunahan Coşgun, github.com/tunacosgun */
+        background: #f50000; /* Tunahan Coşgun, github.com/tunacosgun */
+        margin: 0; /* Tunahan Coşgun, github.com/tunacosgun */
+        overflow: hidden; /* Tunahan Coşgun, github.com/tunacosgun */
+      } /* Tunahan Coşgun, github.com/tunacosgun */
+ /* Tunahan Coşgun, github.com/tunacosgun */
+      @keyframes fadeIn { /* Tunahan Coşgun, github.com/tunacosgun */
+        from { /* Tunahan Coşgun, github.com/tunacosgun */
+          opacity: 0; /* Tunahan Coşgun, github.com/tunacosgun */
+        } /* Tunahan Coşgun, github.com/tunacosgun */
+        to { /* Tunahan Coşgun, github.com/tunacosgun */
+          opacity: 1; /* Tunahan Coşgun, github.com/tunacosgun */
+        } /* Tunahan Coşgun, github.com/tunacosgun */
+      } /* Tunahan Coşgun, github.com/tunacosgun */
+      @keyframes chill { /* Tunahan Coşgun, github.com/tunacosgun */
+        from { /* Tunahan Coşgun, github.com/tunacosgun */
+          opacity: 1; /* Tunahan Coşgun, github.com/tunacosgun */
+        } /* Tunahan Coşgun, github.com/tunacosgun */
+        to { /* Tunahan Coşgun, github.com/tunacosgun */
+          opacity: 1; /* Tunahan Coşgun, github.com/tunacosgun */
+        } /* Tunahan Coşgun, github.com/tunacosgun */
+      } /* Tunahan Coşgun, github.com/tunacosgun */
+      @keyframes fadeOut { /* Tunahan Coşgun, github.com/tunacosgun */
+        from { /* Tunahan Coşgun, github.com/tunacosgun */
+          opacity: 1; /* Tunahan Coşgun, github.com/tunacosgun */
+        } /* Tunahan Coşgun, github.com/tunacosgun */
+        to { /* Tunahan Coşgun, github.com/tunacosgun */
+          opacity: 0; /* Tunahan Coşgun, github.com/tunacosgun */
+        } /* Tunahan Coşgun, github.com/tunacosgun */
+      } /* Tunahan Coşgun, github.com/tunacosgun */
+      p { /* Tunahan Coşgun, github.com/tunacosgun */
+        position: absolute; /* Tunahan Coşgun, github.com/tunacosgun */
+        top: 36%; /* Tunahan Coşgun, github.com/tunacosgun */
+        left: 50%; /* Tunahan Coşgun, github.com/tunacosgun */
+        transform: translate(-50%, -50%); /* Tunahan Coşgun, github.com/tunacosgun */
+        font-family: 'Playfair Display', cursive; /* Tunahan Coşgun, github.com/tunacosgun */
+        font-size: 3.5rem; /* Tunahan Coşgun, github.com/tunacosgun */
+        color: white; /* Tunahan Coşgun, github.com/tunacosgun */
+        opacity: 0; /* Tunahan Coşgun, github.com/tunacosgun */
+        font-family: "Source Sans Pro"; /* Tunahan Coşgun, github.com/tunacosgun */
+        animation: fadeIn 10s ease-out, chill 10s 10s, fadeOut 10s 10s; /* Tunahan Coşgun, github.com/tunacosgun */
+      } /* Tunahan Coşgun, github.com/tunacosgun */
+    </style> <!-- Tunahan Coşgun, github.com/tunacosgun -->
+  </head> <!-- Tunahan Coşgun, github.com/tunacosgun -->
+  <body> <!-- Tunahan Coşgun, github.com/tunacosgun -->
+    <canvas></canvas> <!-- Tunahan Coşgun, github.com/tunacosgun -->
+    <p>github.com/tunacosgun</p> <!-- Tunahan Coşgun, github.com/tunacosgun -->
+ <!-- Tunahan Coşgun, github.com/tunacosgun -->
+    <script> // Tunahan Coşgun, github.com/tunacosgun
+      var canvas = document.querySelector('canvas'); // Tunahan Coşgun, github.com/tunacosgun
+      var c = canvas.getContext('2d'); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      canvas.width = window.innerWidth; // Tunahan Coşgun, github.com/tunacosgun
+      canvas.height = window.innerHeight; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      var mouse = { // Tunahan Coşgun, github.com/tunacosgun
+        x: window.innerWidth / 2, // Tunahan Coşgun, github.com/tunacosgun
+        y: window.innerHeight / 2 // Tunahan Coşgun, github.com/tunacosgun
+      }; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      var isMouseDown = false; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      window.addEventListener("mousemove", function(event) { // Tunahan Coşgun, github.com/tunacosgun
+        mouse.x = event.clientX; // Tunahan Coşgun, github.com/tunacosgun
+        mouse.y = event.clientY; // Tunahan Coşgun, github.com/tunacosgun
+      }); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      window.addEventListener("resize", function() { // Tunahan Coşgun, github.com/tunacosgun
+        canvas.height = window.innerHeight; // Tunahan Coşgun, github.com/tunacosgun
+        canvas.width = window.innerWidth; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        initializeVariables(); // Tunahan Coşgun, github.com/tunacosgun
+      }); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      window.addEventListener("mousedown", function() { // Tunahan Coşgun, github.com/tunacosgun
+        isMouseDown = true; // Tunahan Coşgun, github.com/tunacosgun
+      }); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      window.addEventListener("mouseup", function() { // Tunahan Coşgun, github.com/tunacosgun
+        isMouseDown = false; // Tunahan Coşgun, github.com/tunacosgun
+      }); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      canvas.addEventListener("touchstart", function() { // Tunahan Coşgun, github.com/tunacosgun
+        isMouseDown = true; // Tunahan Coşgun, github.com/tunacosgun
+      }); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      canvas.addEventListener("touchmove", function(event) { // Tunahan Coşgun, github.com/tunacosgun
+        event.preventDefault(); // Tunahan Coşgun, github.com/tunacosgun
+        mouse.x = event.touches[0].pageX; // Tunahan Coşgun, github.com/tunacosgun
+        mouse.y = event.touches[0].pageY; // Tunahan Coşgun, github.com/tunacosgun
+      }); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      canvas.addEventListener("touchend", function() { // Tunahan Coşgun, github.com/tunacosgun
+        isMouseDown = false; // Tunahan Coşgun, github.com/tunacosgun
+      }); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      function Cannon(x, y, width, height, color) { // Tunahan Coşgun, github.com/tunacosgun
+        this.x = x; // Tunahan Coşgun, github.com/tunacosgun
+        this.y = y; // Tunahan Coşgun, github.com/tunacosgun
+        this.width = width; // Tunahan Coşgun, github.com/tunacosgun
+        this.height = height; // Tunahan Coşgun, github.com/tunacosgun
+        this.angle = 0; // Tunahan Coşgun, github.com/tunacosgun
+        this.color = color; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        this.update = function() { // Tunahan Coşgun, github.com/tunacosgun
+          desiredAngle = Math.atan2(mouse.y - this.y, mouse.x - this.x); // Tunahan Coşgun, github.com/tunacosgun
+          this.angle = desiredAngle; // Tunahan Coşgun, github.com/tunacosgun
+          this.draw();	 // Tunahan Coşgun, github.com/tunacosgun
+        }; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        this.draw = function() { // Tunahan Coşgun, github.com/tunacosgun
+          c.save(); // Tunahan Coşgun, github.com/tunacosgun
+          c.translate(this.x, this.y); // Tunahan Coşgun, github.com/tunacosgun
+          c.rotate(this.angle); // Tunahan Coşgun, github.com/tunacosgun
+          c.beginPath(); // Tunahan Coşgun, github.com/tunacosgun
+          c.fillStyle = this.color; // Tunahan Coşgun, github.com/tunacosgun
+          c.shadowColor = this.color; // Tunahan Coşgun, github.com/tunacosgun
+          c.shadowBlur = 3; // Tunahan Coşgun, github.com/tunacosgun
+          c.shadowOffsetX = 0; // Tunahan Coşgun, github.com/tunacosgun
+          c.shadowOffsetY = 0; // Tunahan Coşgun, github.com/tunacosgun
+          c.fillRect(0, -this.height / 2, this.width, height); // Tunahan Coşgun, github.com/tunacosgun
+          c.closePath(); // Tunahan Coşgun, github.com/tunacosgun
+          c.restore(); // Tunahan Coşgun, github.com/tunacosgun
+        }; // Tunahan Coşgun, github.com/tunacosgun
+      } // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      function Cannonball(x, y, dx, dy, radius, color, cannon, particleColors) { // Tunahan Coşgun, github.com/tunacosgun
+        this.x = x; // Tunahan Coşgun, github.com/tunacosgun
+        this.y = y; // Tunahan Coşgun, github.com/tunacosgun
+        this.dx = dx; // Tunahan Coşgun, github.com/tunacosgun
+        this.dy = -dy; // Tunahan Coşgun, github.com/tunacosgun
+        this.radius = radius; // Tunahan Coşgun, github.com/tunacosgun
+        this.color = color; // Tunahan Coşgun, github.com/tunacosgun
+        this.particleColors = particleColors; // Tunahan Coşgun, github.com/tunacosgun
+        this.source = cannon; // Tunahan Coşgun, github.com/tunacosgun
+        this.timeToLive = canvas.height / (canvas.height + 800); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        this.init = function() { // Tunahan Coşgun, github.com/tunacosgun
+          // Initialize the cannonballs start coordinates (from muzzle of cannon) // Tunahan Coşgun, github.com/tunacosgun
+          this.x = Math.cos(this.source.angle) * this.source.width; // Tunahan Coşgun, github.com/tunacosgun
+          this.y = Math.sin(this.source.angle) * this.source.width; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+          // Translate relative to canvas positioning // Tunahan Coşgun, github.com/tunacosgun
+          this.x = this.x + (canvas.width / 2); // Tunahan Coşgun, github.com/tunacosgun
+          this.y = this.y + (canvas.height);	 // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+          // Determine whether the cannonball should be  // Tunahan Coşgun, github.com/tunacosgun
+          // fired to the left or right of the cannon // Tunahan Coşgun, github.com/tunacosgun
+          if (mouse.x - canvas.width / 2 < 0) { // Tunahan Coşgun, github.com/tunacosgun
+            this.dx = -this.dx; // Tunahan Coşgun, github.com/tunacosgun
+          } // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+          this.dy = Math.sin(this.source.angle) * 8; // Tunahan Coşgun, github.com/tunacosgun
+          this.dx = Math.cos(this.source.angle) * 8; // Tunahan Coşgun, github.com/tunacosgun
+        }; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        this.update = function() { // Tunahan Coşgun, github.com/tunacosgun
+          if (this.y + this.radius + this.dy > canvas.height) { // Tunahan Coşgun, github.com/tunacosgun
+            this.dy = -this.dy; // Tunahan Coşgun, github.com/tunacosgun
+          } else { // Tunahan Coşgun, github.com/tunacosgun
+            this.dy += gravity; // Tunahan Coşgun, github.com/tunacosgun
+          } // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+          this.x += this.dx; // Tunahan Coşgun, github.com/tunacosgun
+          this.y += this.dy; // Tunahan Coşgun, github.com/tunacosgun
+          this.draw();	 // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+          this.timeToLive -= 0.01; // Tunahan Coşgun, github.com/tunacosgun
+        }; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        this.draw = function() { // Tunahan Coşgun, github.com/tunacosgun
+          c.save(); // Tunahan Coşgun, github.com/tunacosgun
+          c.beginPath(); // Tunahan Coşgun, github.com/tunacosgun
+          c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false); // Tunahan Coşgun, github.com/tunacosgun
+          c.shadowColor = this.color; // Tunahan Coşgun, github.com/tunacosgun
+          c.shadowBlur = 5; // Tunahan Coşgun, github.com/tunacosgun
+          c.shadowOffsetX = 0; // Tunahan Coşgun, github.com/tunacosgun
+          c.shadowOffsetY = 0; // Tunahan Coşgun, github.com/tunacosgun
+          c.fillStyle = this.color; // Tunahan Coşgun, github.com/tunacosgun
+          c.fill(); // Tunahan Coşgun, github.com/tunacosgun
+          c.closePath(); // Tunahan Coşgun, github.com/tunacosgun
+          c.restore(); // Tunahan Coşgun, github.com/tunacosgun
+        }; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        this.init(); // Tunahan Coşgun, github.com/tunacosgun
+      } // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      function Particle(x, y, dx, dy, radius, color) { // Tunahan Coşgun, github.com/tunacosgun
+        this.x = x; // Tunahan Coşgun, github.com/tunacosgun
+        this.y = y; // Tunahan Coşgun, github.com/tunacosgun
+        this.dx = dx; // Tunahan Coşgun, github.com/tunacosgun
+        this.dy = -dy; // Tunahan Coşgun, github.com/tunacosgun
+        this.radius = 5; // Tunahan Coşgun, github.com/tunacosgun
+        this.color = color; // Tunahan Coşgun, github.com/tunacosgun
+        this.timeToLive = 1; // Tunahan Coşgun, github.com/tunacosgun
+        // this.mass = 0.2; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        this.update = function() { // Tunahan Coşgun, github.com/tunacosgun
+          if (this.y + this.radius + this.dy > canvas.height) { // Tunahan Coşgun, github.com/tunacosgun
+            this.dy = -this.dy; // Tunahan Coşgun, github.com/tunacosgun
+          } // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+          if (this.x + this.radius + this.dx > canvas.width || this.x - this.radius + this.dx < 0) { // Tunahan Coşgun, github.com/tunacosgun
+            this.dx = -this.dx; // Tunahan Coşgun, github.com/tunacosgun
+          } // Tunahan Coşgun, github.com/tunacosgun
+          // this.dy += gravity * this.mass; // Tunahan Coşgun, github.com/tunacosgun
+          this.x += this.dx; // Tunahan Coşgun, github.com/tunacosgun
+          this.y += this.dy; // Tunahan Coşgun, github.com/tunacosgun
+          this.draw(); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+          this.timeToLive -= 0.01; // Tunahan Coşgun, github.com/tunacosgun
+        }; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        this.draw = function() { // Tunahan Coşgun, github.com/tunacosgun
+          c.save(); // Tunahan Coşgun, github.com/tunacosgun
+          c.beginPath(); // Tunahan Coşgun, github.com/tunacosgun
+          c.arc(this.x, this.y, 2, 0, Math.PI * 2, false); // Tunahan Coşgun, github.com/tunacosgun
+          c.shadowColor = this.color; // Tunahan Coşgun, github.com/tunacosgun
+          c.shadowBlur = 10; // Tunahan Coşgun, github.com/tunacosgun
+          c.shadowOffsetX = 0; // Tunahan Coşgun, github.com/tunacosgun
+          c.shadowOffsetY = 0; // Tunahan Coşgun, github.com/tunacosgun
+          c.fillStyle = this.color; // Tunahan Coşgun, github.com/tunacosgun
+          c.fill(); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+          c.closePath(); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+          c.restore(); // Tunahan Coşgun, github.com/tunacosgun
+        }; // Tunahan Coşgun, github.com/tunacosgun
+      } // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      function Explosion(cannonball) { // Tunahan Coşgun, github.com/tunacosgun
+        this.particles = [];	 // Tunahan Coşgun, github.com/tunacosgun
+        this.rings = []; // Tunahan Coşgun, github.com/tunacosgun
+        this.source = cannonball; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        this.init = function() { // Tunahan Coşgun, github.com/tunacosgun
+          for (var i = 0; i < 10; i++) { // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+            var dx = (Math.random() * 6) - 3; // Tunahan Coşgun, github.com/tunacosgun
+            var dy = (Math.random() * 6) - 3; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+            // var hue = (255 / 5) * i; // Tunahan Coşgun, github.com/tunacosgun
+            // var color = "hsl(" + hue + ", 100%, 50%)"; // Tunahan Coşgun, github.com/tunacosgun
+            var randomColorIndex = Math.floor(Math.random() * this.source.particleColors.length); // Tunahan Coşgun, github.com/tunacosgun
+            var randomParticleColor = this.source.particleColors[randomColorIndex]; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+              this.particles.push(new Particle(this.source.x, this.source.y, dx, dy, 1, randomParticleColor)); // Tunahan Coşgun, github.com/tunacosgun
+          } // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+          // Create ring once explosion is instantiated // Tunahan Coşgun, github.com/tunacosgun
+            // this.rings.push(new Ring(this.source, "blue")); // Tunahan Coşgun, github.com/tunacosgun
+        }; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        this.init(); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        this.update = function() { // Tunahan Coşgun, github.com/tunacosgun
+      for (var i = 0; i < this.particles.length; i++) { // Tunahan Coşgun, github.com/tunacosgun
+              this.particles[i].update(); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+              // Remove particles from scene one time to live is up // Tunahan Coşgun, github.com/tunacosgun
+              if (this.particles[i].timeToLive < 0) { // Tunahan Coşgun, github.com/tunacosgun
+                this.particles.splice(i, 1); // Tunahan Coşgun, github.com/tunacosgun
+              } // Tunahan Coşgun, github.com/tunacosgun
+          } // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+          // Render rings // Tunahan Coşgun, github.com/tunacosgun
+          for (var j = 0; j < this.rings.length; j++) { // Tunahan Coşgun, github.com/tunacosgun
+            this.rings[j].update(); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+            // Remove rings from scene one time to live is up // Tunahan Coşgun, github.com/tunacosgun
+              if (this.rings[j].timeToLive < 0) { // Tunahan Coşgun, github.com/tunacosgun
+                this.rings.splice(i, 1); // Tunahan Coşgun, github.com/tunacosgun
+              } // Tunahan Coşgun, github.com/tunacosgun
+          } // Tunahan Coşgun, github.com/tunacosgun
+        }; // Tunahan Coşgun, github.com/tunacosgun
+      } // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      var gravity = -0.1; // Tunahan Coşgun, github.com/tunacosgun
+      var desiredAngle = 0; // Tunahan Coşgun, github.com/tunacosgun
+      var cannon, cannonballs, explosions, colors; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      function initializeVariables() { // Tunahan Coşgun, github.com/tunacosgun
+        cannon = new Cannon(canvas.width / 2, canvas.height, 40, 20, "white"); // Tunahan Coşgun, github.com/tunacosgun
+        cannonballs = []; // Tunahan Coşgun, github.com/tunacosgun
+        explosions = []; // Tunahan Coşgun, github.com/tunacosgun
+        colors = [ // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+          // Red / Orange // Tunahan Coşgun, github.com/tunacosgun
+          { // Tunahan Coşgun, github.com/tunacosgun
+            cannonballColor: "#affdf4", // Tunahan Coşgun, github.com/tunacosgun
+            particleColors: [ // Tunahan Coşgun, github.com/tunacosgun
+              "#ff4747", // Tunahan Coşgun, github.com/tunacosgun
+              "#00ceed", // Tunahan Coşgun, github.com/tunacosgun
+              "#fff", // Tunahan Coşgun, github.com/tunacosgun
+              "pink", // Tunahan Coşgun, github.com/tunacosgun
+            ] // Tunahan Coşgun, github.com/tunacosgun
+          } // Tunahan Coşgun, github.com/tunacosgun
+        ]; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      } // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      initializeVariables(); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      var timer = 0; // Tunahan Coşgun, github.com/tunacosgun
+      var isIntroComplete = false; // Tunahan Coşgun, github.com/tunacosgun
+      var introTimer = 0; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      function animate() { // Tunahan Coşgun, github.com/tunacosgun
+        window.requestAnimationFrame(animate); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        c.fillStyle = "rgba(18, 18, 18, 0.2)"; // Tunahan Coşgun, github.com/tunacosgun
+        c.fillRect(0, 0, canvas.width, canvas.height);			 // Tunahan Coşgun, github.com/tunacosgun
+        cannon.update(); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        if (isIntroComplete === false) { // Tunahan Coşgun, github.com/tunacosgun
+          introTimer += 1; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+          if (introTimer % 3 === 0) { // Tunahan Coşgun, github.com/tunacosgun
+            var randomColor = Math.floor(Math.random() * colors.length); // Tunahan Coşgun, github.com/tunacosgun
+            var color = colors[randomColor]; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+            cannonballs.push(new Cannonball(canvas.width / 2, canvas.height / 2, 2, 2, 4, color.cannonballColor, cannon, color.particleColors)); // Tunahan Coşgun, github.com/tunacosgun
+          } // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+          if (introTimer > 30) { // Tunahan Coşgun, github.com/tunacosgun
+            isIntroComplete = true; // Tunahan Coşgun, github.com/tunacosgun
+          } // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        } // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        // Render cannonballs // Tunahan Coşgun, github.com/tunacosgun
+        for (var i = 0; i < cannonballs.length; i++) { // Tunahan Coşgun, github.com/tunacosgun
+            cannonballs[i].update(); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+            if (cannonballs[i].timeToLive <= 0) { // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+              // Create particle explosion after time to live expires // Tunahan Coşgun, github.com/tunacosgun
+              explosions.push(new Explosion(cannonballs[i])); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+              cannonballs.splice(i, 1); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+            } // Tunahan Coşgun, github.com/tunacosgun
+        } // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        // Render explosions // Tunahan Coşgun, github.com/tunacosgun
+        for (var j = 0; j < explosions.length; j++) { // Tunahan Coşgun, github.com/tunacosgun
+              //Do something // Tunahan Coşgun, github.com/tunacosgun
+              explosions[j].update(); // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+            // Remove explosions from scene once all associated particles are removed // Tunahan Coşgun, github.com/tunacosgun
+            if (explosions[j].particles.length <= 0) { // Tunahan Coşgun, github.com/tunacosgun
+              explosions.splice(j, 1); // Tunahan Coşgun, github.com/tunacosgun
+            } // Tunahan Coşgun, github.com/tunacosgun
+        }	 // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+        if (isMouseDown === true) { // Tunahan Coşgun, github.com/tunacosgun
+          timer += 1; // Tunahan Coşgun, github.com/tunacosgun
+          if (timer % 3 === 0) { // Tunahan Coşgun, github.com/tunacosgun
+            var randomParticleColorIndex = Math.floor(Math.random() * colors.length); // Tunahan Coşgun, github.com/tunacosgun
+            var randomColors = colors[randomParticleColorIndex]; // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+            cannonballs.push(new Cannonball(mouse.x, mouse.y, 2, 2, 4, randomColors.cannonballColor, cannon, randomColors.particleColors)); // Tunahan Coşgun, github.com/tunacosgun
+          } // Tunahan Coşgun, github.com/tunacosgun
+        } // Tunahan Coşgun, github.com/tunacosgun
+      } // Tunahan Coşgun, github.com/tunacosgun
+ // Tunahan Coşgun, github.com/tunacosgun
+      animate(); // Tunahan Coşgun, github.com/tunacosgun
+    </script> <!-- Tunahan Coşgun, github.com/tunacosgun -->
+  </body> <!-- Tunahan Coşgun, github.com/tunacosgun -->
+</html> <!-- Tunahan Coşgun, github.com/tunacosgun -->
